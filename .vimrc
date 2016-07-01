@@ -11,7 +11,7 @@ set incsearch	" do incremental searching
 set number " show line numbers
 syntax on
 set t_Co=256 " 256 colors
-set background=dark
+set background=light
 colorscheme flattened_light 
 set hlsearch
 " set spell 
@@ -42,6 +42,13 @@ set cc=80
 set hidden
 set exrc
 set secure
+""folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=2         "this is just what i use
+""hilight current line
+set cursorline
 
 set nocompatible
 filetype off                  " required
@@ -67,7 +74,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'jlanzarotta/bufexplorer'
 Plugin 'itchyny/lightline.vim'
 Plugin 'scrooloose/syntastic'
-Bundle 'nathanaelkane/vim-indent-guides'
+" Bundle 'nathanaelkane/vim-indent-guides'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'honza/vim-snippets'
 Bundle 'xolox/vim-misc'
@@ -80,6 +87,8 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'ervandew/supertab'
+Plugin 'rking/ag.vim'
+Plugin 'Yggdroot/indentLine'
 
 ""Ruby
 " --------------------------------------------------------------------------
@@ -110,10 +119,33 @@ Plugin 'joukevandermaas/vim-ember-hbs'
 
 ""--------------------------------------------------------------------------
 
+""Go
+""--------------------------------------------------------------------------
+
+Plugin 'fatih/vim-go'
+
+""---------------------------------------------------------------------------
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 filetype plugin on
 ""---------------------------------------------------------------------------
+
+""Go
+""--------------------------------------------------------------------------
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+""---------------------------------------------------------------------------
+
 "" Syntastic
 
 "let g:syntastic_mode_map = { "mode": "passive",
