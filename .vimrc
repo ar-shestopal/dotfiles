@@ -8,7 +8,8 @@ set history=50	" keep 50 lines of command line history
 set ruler	" show the cursor position all the time
 set showcmd	" display incomplete commands
 set incsearch	" do incremental searching
-set number " show line numbers
+" set number " show line numbers
+set relativenumber
 syntax on
 set t_Co=256 " 256 colors
 set background=light
@@ -133,6 +134,7 @@ filetype plugin on
 
 ""Go
 ""--------------------------------------------------------------------------
+au Filetype ruby set runtimepath-=~/.vim/bundle/vim-go
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -141,22 +143,32 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+ 
+" use goimports for formatting
+let g:go_fmt_command = "gofmt"
 
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
+" Open go doc in vertical window, horizontal, or tab
+au Filetype go nnoremap <leader>v :vsp <CR>:exe "GoDef" <CR>
+au Filetype go nnoremap <leader>s :sp <CR>:exe "GoDef"<CR>
+au Filetype go nnoremap <leader>t :tab split <CR>:exe "GoDef"<CR>
+
+let g:syntastic_go_checkers = ["go","golint", "govet", "errcheck"]
+
 ""---------------------------------------------------------------------------
 
 "" Syntastic
 
-"let g:syntastic_mode_map = { "mode": "passive",
-                           "\ "active_filetypes": ["ruby"],
-                           "\ "passive_filetypes": ["puppet", "javascript"] "}
-"let g:syntastic_javascript_checkers=['']
-"let g:syntastic_check_on_open = 0
-"let g:syntastic_disabled_filetypes=['javascript']
-"let g:syntastic_javascript_checkers = ['jshint']
-"let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+let g:syntastic_mode_map = { "mode": "active", "passive_filetypes": ["puppet", "javascript", "scss"], "active_filetypes": ["ruby", "go"] }
 let g:syntastic_ruby_mri_exec = "/Users/zibaluski/.rvm/rubies/ruby-2.2.2/bin/ruby"
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+au Filetype go let g:syntastic_always_populate_loc_list = 1
+au Filetype go let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 "------------------------------------------------------------------
 
 ""Rails-vim
