@@ -13,7 +13,8 @@ set relativenumber
 syntax on
 set t_Co=256 " 256 colors
 set background=light
-colorscheme flattened_light 
+" colorscheme flatland 
+" colorscheme flattened_light 
 set hlsearch
 " set spell 
 " set spelllang=en_us
@@ -90,6 +91,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'ervandew/supertab'
 Plugin 'rking/ag.vim'
 Plugin 'Yggdroot/indentLine'
+Plugin 'flazz/vim-colorschemes'
 
 ""Ruby
 " --------------------------------------------------------------------------
@@ -132,6 +134,7 @@ filetype plugin indent on    " required
 filetype plugin on
 ""---------------------------------------------------------------------------
 
+colorscheme wombat256
 ""Go
 ""--------------------------------------------------------------------------
 au Filetype ruby set runtimepath-=~/.vim/bundle/vim-go
